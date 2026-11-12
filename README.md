@@ -7,7 +7,7 @@ A static, single-page front-desk site for Richmond Area Family Therapy. It uses 
 - **AI tool:** OpenAI Codex.
 - **First prompt:** Used the assignment brief in chat, filled with the provided Supabase project URL, publishable key, and RAFT table definitions.
 - **What needed correction:** The first Home version showed only future appointments, so Holly's 2024 sample data would make the list look empty. The first Dashboard also measured the current calendar month, which could show no sample activity. Both now use the newest available appointment records/month as a fallback. The sign-in screen now distinguishes incorrect credentials from a valid login that is missing its RAFT role claim.
-- **Step 7 change and reason:** Home falls back to the most recent appointments when there are no future appointments, and Dashboard shows counts for the month of the latest recorded appointment. This makes the supplied 2024 sample data visible and useful.
+- **Step 7 change and reason:** Dashboard activity now includes the kept-visit rate, calculated from ScheduledFor rows with a recorded kept/not-kept status. Visits with no status are excluded so the percentage describes only recorded outcomes.
 
 ## Host it
 
