@@ -440,13 +440,13 @@ async function loadDashboard() {
   stats.innerHTML = `<div class="stat-loading"><span class="spinner"></span> Loading statistics…</div>`;
   activity.innerHTML = `<span class="spinner"></span>`;
   try {
-    const [clientCount, appointmentCount, counselorCount, roomCount, latestAppointments, keptCount] = await Promise.all([
+    const [clientCount, appointmentCount, counselorCount, roomCount, latestAppointments, keptCount, markedVisitCount] = await Promise.all([
       countResult(supabase.from("client").select("clientid", { count: "exact", head: true })),
       countResult(supabase.from("appointment").select("appointmentid", { count: "exact", head: true })),
       countResult(supabase.from("counselor").select("counselorid", { count: "exact", head: true })),
       countResult(supabase.from("room").select("roomnumber", { count: "exact", head: true })),
       result(supabase.from("appointment").select("appointmentid,appointmenttime").not("appointmenttime", "is", null).order("appointmenttime", { ascending: false }).limit(1)),
-      countResult(supabase.from("scheduledfor").select("appointmentid", { count: "exact", head: true }).eq("kept", true))
+      countResult(supabase.from("scheduledfor").select("appointmentid", { count: "exact", head: true }).eq("kept", true)), countResult(supabase.from("scheduledfor").select("appointmentid", { count: "exact", head: true }).not("kept", "is", null))
     ]);
     if (token !== dashboardLoadToken || !currentSession) return;
     let monthCount = 0;
@@ -465,7 +465,7 @@ async function loadDashboard() {
     stats.innerHTML = [
       ["♙", "Clients", clientCount], ["◷", "Appointments", appointmentCount], ["✳", "Counselors", counselorCount], ["▦", "Rooms", roomCount]
     ].map(([icon, label, value]) => `<div class="stat-card"><span class="stat-icon">${icon}</span><span class="stat-label">${escapeHtml(label)}</span><strong class="stat-value">${escapeHtml(value)}</strong></div>`).join("");
-    activity.innerHTML = `<strong>${escapeHtml(monthCount)}</strong><small>appointments in ${escapeHtml(monthLabel)} · ${escapeHtml(keptCount)} client visits marked kept overall</small>`;
+    const keptRate = markedVisitCount ? `${Math.round((keptCount / markedVisitCount) * 100)}%` : "—"; activity.innerHTML = `<strong>${escapeHtml(monthCount)}</strong><small>appointments in ${escapeHtml(monthLabel)} · ${escapeHtml(keptRate)} kept rate across marked client visits (${escapeHtml(keptCount)} of ${escapeHtml(markedVisitCount)})</small>`;
   } catch (error) {
     if (token !== dashboardLoadToken) return;
     stats.innerHTML = `<div class="stat-loading">${escapeHtml(sayError(error))}</div>`;
