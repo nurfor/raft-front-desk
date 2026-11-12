@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f6f7f4" />
+    <title>RAFT · Front Desk</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <noscript><div class="noscript-warning">This front-desk site needs JavaScript enabled to sign in.</div></noscript>
+    <div class="app-frame">
+      <section id="sign-in-screen" class="sign-in-screen" aria-labelledby="sign-in-title">
+        <div class="signin-art" aria-hidden="true">
+          <div class="art-orbit orbit-one"></div>
+          <div class="art-orbit orbit-two"></div>
+          <div class="art-sun"></div>
+          <div class="art-hill hill-back"></div>
+          <div class="art-hill hill-front"></div>
+          <div class="art-caption"><span class="caption-dot"></span> A calm start to every visit</div>
+        </div>
+        <div class="signin-panel">
+          <div class="brand-lockup">
+            <div class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></div>
+            <div><div class="brand-name">RAFT</div><div class="brand-subtitle">Richmond Area Family Therapy</div></div>
+          </div>
+          <div class="signin-copy">
+            <p class="eyebrow">FRONT DESK PORTAL</p>
+            <h1 id="sign-in-title">Good to see you.</h1>
+            <p class="muted">Sign in with your RAFT staff account to continue.</p>
+          </div>
+          <form id="sign-in-form" class="form-stack">
+            <label class="field-label" for="email">Email address</label>
+            <input id="email" name="email" type="email" autocomplete="username" placeholder="you@raft.org" required />
+            <label class="field-label" for="password">Password</label>
+            <input id="password" name="password" type="password" autocomplete="current-password" placeholder="Enter your password" required />
+            <div id="sign-in-error" class="notice notice-error" role="alert" hidden></div>
+            <button id="sign-in-button" class="button button-primary button-wide" type="submit"><span>Sign in</span><span class="button-arrow" aria-hidden="true">↗</span></button>
+          </form>
+          <p class="signin-footnote">Staff access only · Accounts are managed by RAFT</p>
+        </div>
+      </section>
+
+      <div id="staff-app" class="staff-app" hidden>
+        <aside class="sidebar">
+          <a class="brand-lockup brand-link" href="#home" aria-label="RAFT home">
+            <div class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></div>
+            <div><div class="brand-name">RAFT</div><div class="brand-subtitle">Front desk</div></div>
+          </a>
+          <div class="sidebar-label">WORKSPACE</div>
+          <nav id="main-nav" class="main-nav" aria-label="Main navigation">
+            <button class="nav-link active" type="button" data-screen="home"><span class="nav-icon">⌂</span><span>Home</span><span class="nav-chevron">↗</span></button>
+            <button class="nav-link" type="button" data-screen="lookup"><span class="nav-icon">⌕</span><span>Client lookup</span><span class="nav-chevron">↗</span></button>
+            <button class="nav-link" type="button" data-screen="dashboard"><span class="nav-icon">▤</span><span>Dashboard</span><span class="nav-chevron">↗</span></button>
+            <button class="nav-link" type="button" data-screen="records"><span class="nav-icon">＋</span><span>Add or edit</span><span class="nav-chevron">↗</span></button>
+          </nav>
+          <div class="sidebar-bottom">
+            <div class="sidebar-note"><span class="note-icon">✳</span><span>Small steps, steady support.</span></div>
+            <div class="staff-card">
+              <div class="avatar" id="staff-avatar">R</div>
+              <div class="staff-meta"><strong id="staff-email">Signed in</strong><span id="staff-role">RAFT staff</span></div>
+              <button id="sign-out-button" class="sign-out-icon" type="button" aria-label="Sign out" title="Sign out">↗</button>
+            </div>
+          </div>
+        </aside>
+
+        <main class="main-area">
+          <header class="topbar">
+            <div class="breadcrumb"><span>RAFT</span><span class="crumb-divider">/</span><strong id="current-section-label">Home</strong></div>
+            <div class="topbar-right"><span class="status-dot"></span><span class="secure-label">Secure staff workspace</span><span id="role-chip" class="role-chip">Staff</span><button id="mobile-sign-out" class="button button-quiet mobile-sign-out" type="button">Sign out</button></div>
+          </header>
+          <div id="global-notice" class="global-notice" role="status" hidden></div>
+
+          <section id="screen-home" class="screen active" aria-labelledby="home-title">
+            <div class="page-heading home-heading">
+              <div><p class="eyebrow">RAFT FRONT DESK</p><h1 id="home-title">Welcome back<span class="heading-period">.</span></h1><p class="muted">Here’s the day at a glance. You’ve got this.</p></div>
+              <button id="home-schedule-button" class="button button-primary" type="button" data-go="records" data-record-mode="new_appointment">Schedule an appointment <span aria-hidden="true">↗</span></button>
+            </div>
+            <div class="welcome-band"><div class="welcome-icon">✳</div><div><strong>Care starts at the front desk.</strong><p>Find a client, keep appointments moving, and make each visit feel a little easier.</p></div><div class="welcome-scribble" aria-hidden="true">hello</div></div>
+            <div class="section-head"><div><p class="eyebrow">YOUR WORKSPACE</p><h2>Where would you like to go?</h2></div><span class="section-kicker">YOUR RAFT TOOLS</span></div>
+            <div class="home-cards">
+              <button class="home-card card-lookup" type="button" data-go="lookup"><span class="card-symbol">⌕</span><strong>Find a client</strong><span>Contact details, visits, and family connections</span><span class="card-link">Open client lookup <b>↗</b></span></button>
+              <button class="home-card card-dashboard" type="button" data-go="dashboard"><span class="card-symbol">▤</span><strong>See the numbers</strong><span>A live view of RAFT’s activity</span><span class="card-link">Open dashboard <b>↗</b></span></button>
+              <button class="home-card card-records" type="button" data-go="records"><span class="card-symbol">＋</span><strong>Update a record</strong><span>Add a client or appointment, or make an edit</span><span class="card-link">Open records <b>↗</b></span></button>
+            </div>
+            <div class="section-head upcoming-head"><div><p id="appointments-kicker" class="eyebrow">COMING UP</p><h2 id="appointments-heading">Upcoming appointments</h2></div><button id="home-add-appointment-link" class="text-link" type="button" data-go="records" data-record-mode="new_appointment">Add appointment <span>↗</span></button></div>
+            <div id="upcoming-list" class="upcoming-list"><div class="loading-row"><span class="spinner"></span> Loading today’s schedule…</div></div>
+          </section>
+
+          <section id="screen-lookup" class="screen" aria-labelledby="lookup-title" hidden>
+            <div class="page-heading"><div><p class="eyebrow">CLIENT DIRECTORY</p><h1 id="lookup-title">Client lookup<span class="heading-period">.</span></h1><p class="muted">Search by name, phone, email, or client ID.</p></div><span class="heading-mark">⌕</span></div>
+            <form id="client-search-form" class="search-panel"><div class="search-input-wrap"><span class="search-icon">⌕</span><input id="client-search-input" name="query" type="search" placeholder="Try a name, email, phone, or ID…" autocomplete="off" /><button class="search-clear" type="reset" aria-label="Clear search">×</button></div><button class="button button-primary" type="submit">Search <span aria-hidden="true">↗</span></button></form>
+            <div id="client-search-message" class="inline-message muted">Start typing to find a client record.</div>
+            <div class="lookup-layout"><div id="client-results" class="client-results" aria-live="polite"></div><div id="client-detail" class="client-detail"><div class="empty-detail"><div class="empty-detail-icon">⌕</div><strong>Client details will appear here</strong><span>Choose a person from your search results.</span></div></div></div>
+          </section>
+
+          <section id="screen-dashboard" class="screen" aria-labelledby="dashboard-title" hidden>
+            <div class="page-heading"><div><p class="eyebrow">RAFT AT A GLANCE</p><h1 id="dashboard-title">Dashboard<span class="heading-period">.</span></h1><p class="muted">Live totals calculated from the RAFT database.</p></div><div class="updated-label"><span class="status-dot"></span> Database totals</div></div>
+            <div id="dashboard-stats" class="stats-grid"><div class="stat-loading"><span class="spinner"></span> Loading statistics…</div></div>
+            <div class="dashboard-lower"><div class="dashboard-panel"><div class="panel-heading"><div><p class="eyebrow">APPOINTMENT ACTIVITY</p><h2 id="activity-period-label">Latest appointment month</h2></div><span class="panel-icon">◷</span></div><div id="month-activity" class="activity-area"><span class="spinner"></span></div></div><div class="dashboard-panel role-panel"><p class="eyebrow">YOUR ACCESS</p><h2 id="access-title">Staff access</h2><p id="access-description" class="muted"></p><div class="access-line"><span class="access-check">✓</span><span>Access is enforced by your Supabase database policies.</span></div></div></div>
+            <p class="data-note"><span>i</span> Totals use records available to your signed-in role. No sample or placeholder data is shown.</p>
+          </section>
+
+          <section id="screen-records" class="screen" aria-labelledby="records-title" hidden>
+            <div class="page-heading"><div><p class="eyebrow">RECORD MANAGEMENT</p><h1 id="records-title">Add or edit a record<span class="heading-period">.</span></h1><p class="muted">Choose an action available to your role.</p></div><span class="heading-mark">＋</span></div>
+            <div class="records-layout"><div class="record-choice-panel"><label class="eyebrow" for="record-action">WHAT WOULD YOU LIKE TO DO?</label><select id="record-action" class="record-action-select"></select><div class="record-help"><span class="record-help-icon">✳</span><p id="record-help-text">Your access controls which fields and actions are available.</p></div><div class="no-delete-note"><span>⌁</span><span>Records can be added or updated here. Deletion is not available.</span></div></div><div class="record-form-panel"><div id="record-form-heading" class="record-form-heading"><p class="eyebrow">RECORD DETAILS</p><h2>Select an action to begin</h2></div><div id="record-form-area"><div class="record-empty"><div class="empty-detail-icon">＋</div><strong>Ready when you are</strong><span>Pick an action from the left to load the form.</span></div></div></div></div>
+          </section>
+
+          <footer class="app-footer"><span>RAFT · Richmond Area Family Therapy</span><span>Care, connected.</span></footer>
+        </main>
+      </div>
+    </div>
+    <script>
+      window.setTimeout(() => {
+        if (window.raftFrontDeskLoaded) return;
+        const message = document.querySelector("#sign-in-error");
+        if (!message) return;
+        message.textContent = "The sign-in app did not load. Open this site from an http:// or https:// address (not directly as a file), and make sure the browser can reach the Supabase client library.";
+        message.hidden = false;
+      }, 4500);
+    </script>
+    <script type="module" src="app.js"></script>
+  </body>
+</html>
